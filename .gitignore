@@ -1,23 +1,10 @@
-coverage
-dist
 node_modules
-npm-debug.log
-yarn-error.log
-yarn.lock
+dist
 package-lock.json
-
-# ide
-.idea
-
-# Mac General
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# umi
+func-test/www
 .umi
 .umi-production
-
-# jslingui
-src/locales/_build
-src/locales/**/*.js
+*.sw*
+*.un~
+config.local.js
+yarn.lock
