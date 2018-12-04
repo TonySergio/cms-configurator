@@ -1,8 +1,10 @@
 import { types } from 'mobx-state-tree';
 
-const Home = types
+console.log(`TYPES: ${types}`);
+
+const Todo = types
   .model({
-    name: types.optional(types.string, '123'),
+    name: types.optional(types.string, 'list'),
     done: types.optional(types.boolean , false)
   })
   .actions(self => {
@@ -15,4 +17,4 @@ const Home = types
     };
   });
 
-export default Home;
+export default Todo;
