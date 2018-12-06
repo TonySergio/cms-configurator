@@ -6,7 +6,9 @@ import Link from "umi/link";
 
 const {  RangePicker } = DatePicker;
 
-@inject("stores")
+@inject(rootStore => ({
+    Home: rootStore.stores.Home
+}))
 @observer
 class App extends Component {
   @observable value = 0;
@@ -20,7 +22,6 @@ class App extends Component {
     console.log(date, dateString);
   }
 
-
   render() {
     return (
       <div>
@@ -30,11 +31,11 @@ class App extends Component {
           </Col>
           <Col span={12}>
             <Rate allowHalf defaultValue={5} />
-            <h2>{this.props.stores.Home.name}</h2>
+            <h2>{this.props.Home.name}</h2>
             <Button
               type="primary"
               onClick={() => {
-                this.props.stores.Home.setTitle("new name");
+                this.props.Home.setTitle("new name");
                 console.log("click");
               }}
             >
@@ -49,7 +50,7 @@ class App extends Component {
         <Row>
           <RangePicker onChange={this.onChangeDate} />
 
-        </Row>  
+        </Row>
       </div>
     );
   }
