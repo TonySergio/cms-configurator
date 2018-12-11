@@ -27,7 +27,7 @@ class Sider extends PureComponent {
         onBreakpoint={isMobile ? null : onCollapseChange}
         className={styles.sider}
       >
-        <div className={styles.brand}
+        <div className={styles.brand}>
           <div className={styles.logo}>
             <img alt="logo" src={config.logoPath} />
             {collapsed ? null : <h1>{config.siteName}</h1>}

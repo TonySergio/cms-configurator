@@ -1,7 +1,5 @@
 import { types } from 'mobx-state-tree';
 
-console.log(`TYPES: ${types}`);
-
 const Todo = types
   .model({
     name: types.optional(types.string, 'list'),

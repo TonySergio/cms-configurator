@@ -4,7 +4,6 @@ import { Menu, Icon, Layout, Avatar, Popover, Badge, List } from 'antd'
 import moment from 'moment'
 import classnames from 'classnames'
 import config from 'config'
-import moment from 'moment'
 import styles from './Header.less'
 
 
@@ -21,7 +20,7 @@ class Header extends PureComponent {
     console.log('SignOut');
   }
 
-  notifications: [],
+  notifications = []
 
   render() {
     const {
@@ -66,7 +65,7 @@ class Header extends PureComponent {
               itemLayout="horizontal"
               dataSource={notifications}
               locale={{
-                emptyText: You have viewed all notifications.,
+                emptyText: 'You have viewed all notifications.',
               }}
               renderItem={item => (
                 <List.Item className={styles.notificationItem}>

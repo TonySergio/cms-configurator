@@ -1,9 +1,10 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import withRouter from 'umi/withRouter'
 import { Loader } from 'components'
 import { Helmet } from 'react-helmet'
 import NProgress from 'nprogress'
-import config from 'utils'
+import { config } from 'utils'
 
 import PrimaryLayout from './PrimaryLayout'
 
@@ -13,14 +14,19 @@ const LayoutMap = {
   primary: PrimaryLayout
 }
 
+@withRouter
 @inject(rootStore => ({
   layoutStore: rootStore.stores.LayoutStore,
   loading: rootStore.stores.LayoutStore.loading
 }))
 @observer
 class BaseLayout extends PureComponent {
+
   previousPath = ''
+
   render() {
+
+
     const Container = LayoutMap['primary'];
     const { children, location, loading } = this.props;
 
@@ -29,27 +35,29 @@ class BaseLayout extends PureComponent {
     window.confirm(`Location is: ${location}`);
 
     if (currentPath !== this.previousPath) {
-      loadingStart();
+      //this.loadingStart();
     }
 
     //if (!loading.global) {
-    setTimeout(() => {
-      loadingStop();
-      this.previousPath = currentPath;
-    }, 1000);
+    // setTimeout((() => {
+    //   this.loadingStop();
+    //   this.previousPath = currentPath;
+    // }).bind(this), 1000);
 
     //}
+    console.log(`Container ${Container}`);
+
     return (
       <Fragment>
         <Helmet>
           <title>{config.siteName}</title>
         </Helmet>
-        <Loader fullScreen spinning={loading.on} />
+        <Loader fullScreen spinning={false} />
         <Container>{children}</Container>
       </Fragment>
-    );
+    )
 
-  },
+  }
 
   loadingStart() {
     const {loading} = this.props;
@@ -63,10 +71,6 @@ class BaseLayout extends PureComponent {
     loading.setOn(false);
   }
 
-}
-
-BaseLayout.propTypes = {
-  loading: PropTypes.object,
 }
 
 export default BaseLayout
