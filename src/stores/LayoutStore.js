@@ -22,10 +22,17 @@ const MenuRoute = types.model('MenuRoute', {
 
 const defaultRoutes = [{
     id: '1',
-    icon: 'dashboard',
-    name: 'New',
-    route: '/new',
-}];
+    icon: 'home',
+    name: 'Start Page',
+    route: '/home',
+},
+  {
+      id: '2',
+      icon: 'database',
+      name: 'Configurations',
+      route: '/configurations',
+  }
+];
 
 const LayoutStore = types.model('LayoutStore', {
   loading: types.optional(Loading, {}),

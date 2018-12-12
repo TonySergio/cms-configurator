@@ -27,7 +27,7 @@ class App extends Component {
       <div>
         <Row>
           <Col span={12}>
-            <Link to="/list">Go to list page</Link>
+            <Link to="/configurations">Go to list page</Link>
           </Col>
           <Col span={12}>
             <Rate allowHalf defaultValue={5} />
