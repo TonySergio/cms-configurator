@@ -25,6 +25,8 @@ class BaseLayout extends PureComponent {
 
   previousPath = ''
 
+  isTestLoading = true
+
   render() {
 
 
@@ -33,18 +35,16 @@ class BaseLayout extends PureComponent {
 
     const currentPath = location.pathname + location.search
 
-    if (currentPath !== this.previousPath) {
-      //this.loadingStart();
+    if (currentPath !== this.previousPath && this.isTestLoading) {
+      this.loadingStart();
     }
 
-    //if (!loading.global) {
-    // setTimeout((() => {
-    //   this.loadingStop();
-    //   this.previousPath = currentPath;
-    // }).bind(this), 1000);
-
-    //}
-    console.log(`Container ${Container}`);
+    if (loading.global && this.isTestLoading) {
+      setTimeout((() => {
+        this.loadingStop();
+        this.previousPath = currentPath;
+      }).bind(this), 1000);
+    }
 
     return (
       <Fragment>

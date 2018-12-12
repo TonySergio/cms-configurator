@@ -28,11 +28,11 @@ export default {
       'umi-plugin-react',
       {
         antd: true,
-        dynamicImport: true, 
-        // {
-        //   webpackChunkName: true,
-        //   loadingComponent: './components/Loader/Loader',
-        // },
+        //dynamicImport: true,
+        dynamicImport: {
+          webpackChunkName: true,
+          loadingComponent: './components/Loader/Loader',
+        },
         routes: {
           exclude: [
             /stores\//,
