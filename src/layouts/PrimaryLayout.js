@@ -18,18 +18,13 @@ const { Header, Bread, Sider } = AppLayout
     layoutStore: rootStore.stores.LayoutStore
 }))
 @observer
-class PrimaryLayout extends PureComponent {
-  state = {
-    isMobile: false
-  }
+class PrimaryLayout extends React.Component {
 
   componentDidMount() {
     this.enquireHandler = enquireScreen(mobile => {
-      const { isMobile } = this.state
+      const { isMobile } = this.props.layoutStore;
       if (isMobile !== mobile) {
-        this.setState({
-          isMobile: mobile,
-        })
+        this.props.layoutStore.setMobile(mobile);
       }
     })
   }
@@ -48,19 +43,17 @@ class PrimaryLayout extends PureComponent {
 
   render() {
     const { location, children, layoutStore } = this.props;
-    const { isMobile } = this.state;
     const { onCollapseChange, onThemeChange } = this;
     const {
       theme,
+      isMobile,
       collapsed,
       routeList,
       notifications,
       avatar,
-      userName
+      userName,
+      upperCaseName,
     } = layoutStore;
-
-    console.log('layoutStore')
-    console.log(layoutStore);
 
     const newRouteList = routeList;
 
@@ -88,29 +81,30 @@ class PrimaryLayout extends PureComponent {
     const siderProps = {
       theme,
       menus,
+      onCollapseChange,
+      onThemeChange: onThemeChange.bind(this),
       isMobile,
       collapsed,
-      onCollapseChange,
-      onThemeChange: onThemeChange.bind(this)
     };
 
     return (
         <Fragment>
           <Layout>
             { isMobile ? (
-                <Drawer>
+                <Drawer
                   maskClosable
                   closable={false}
                   onClose={onCollapseChange.bind(this, !collapsed)}
                   visible={!collapsed}
                   placement="left"
-                  width={200}
+                  width={256}
                   style={{
                     padding: 0,
                     height: '100vh'
                   }}
+                >
 
-                  <Sider {...siderProps} collapsed={false} />
+                  <Sider {...siderProps} collapsed={false}/>
                 </Drawer>
             ) : (
               <Sider {...siderProps} />

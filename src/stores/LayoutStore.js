@@ -34,6 +34,7 @@ const LayoutStore = types.model('LayoutStore', {
   routeList: types.optional(types.array(MenuRoute), defaultRoutes),
   collapsed: store.get('collapsed') || false,
   theme: store.get('theme') || defaultTheme,
+  isMobile: false,
   notifications: types.optional(types.array(types.string), [])
 }).actions(self => ({
     handleCollapseChange(collapsed) {
@@ -44,8 +45,11 @@ const LayoutStore = types.model('LayoutStore', {
     handleThemeChange(theme=defaultTheme) {
       store.set('theme', theme);
       self.theme = theme;
+    },
+    setMobile(mobile) {
+      self.isMobile = mobile;
     }
 
-}));
+}))
 
 export default LayoutStore;

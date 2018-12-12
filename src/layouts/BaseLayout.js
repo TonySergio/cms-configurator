@@ -21,7 +21,7 @@ const LayoutMap = {
   loading: rootStore.stores.LayoutStore.loading
 }))
 @observer
-class BaseLayout extends PureComponent {
+class BaseLayout extends React.Component {
 
   previousPath = ''
 

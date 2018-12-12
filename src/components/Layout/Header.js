@@ -10,10 +10,6 @@ import styles from './Header.less'
 
 const { SubMenu } = Menu
 
-@inject(rootStore => ({
-  layoutStore: rootStore.stores.LayoutStore
-}))
-@observer
 class Header extends PureComponent {
   handleClickMenu = e => {
     e.key === 'SignOut' && this.onSignOut()

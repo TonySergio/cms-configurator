@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { inject, observer } from "mobx-react";
 import { Icon, Switch, Layout } from 'antd'
 import ScrollBar from '../ScrollBar'
 import { config } from 'utils'
 import SiderMenu from './Menu'
 import styles from './Sider.less'
 
-class Sider extends PureComponent {
+
+class Sider extends  PureComponent {
 
   isShowSwithTheme = false
 
