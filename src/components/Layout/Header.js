@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { inject, observer } from "mobx-react";
 import { Menu, Icon, Layout, Avatar, Popover, Badge, List } from 'antd'
 import moment from 'moment'
 import classnames from 'classnames'
@@ -9,9 +10,10 @@ import styles from './Header.less'
 
 const { SubMenu } = Menu
 
-@inject(rootStore => {
+@inject(rootStore => ({
   layoutStore: rootStore.stores.LayoutStore
-})
+}))
+@observer
 class Header extends PureComponent {
   handleClickMenu = e => {
     e.key === 'SignOut' && this.onSignOut()
@@ -26,16 +28,15 @@ class Header extends PureComponent {
     const {
       fixed,
       collapsed,
-      onCollapseChange
+      avatar,
+      onCollapseChange,
     } = this.props;
 
-    const { avatar } = this.props.layoutStore;
     const { notifications } = this;
-
 
     const rightContent = [
       <Menu key="user" mode="horizontal" onClick={this.handleClickMenu}>
-        <Submenu
+        <SubMenu
           title={
             <Fragment>
               <span style={{color: '#999', marginRight: 4}}>
@@ -48,8 +49,8 @@ class Header extends PureComponent {
           <Menu.Item key="SignOut">
             Sign Out
           </Menu.Item>
-      </Submenu>
-    </Menu>
+      </SubMenu>
+      </Menu>
     ]
 
     rightContent.unshift(

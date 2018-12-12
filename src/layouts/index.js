@@ -19,8 +19,6 @@ class Layout extends Component {
     const { children, location } = this.props;
     const { language } = this.state;
 
-    console.log(111112333);
-
     return (
       <LocaleProvider locale={languages[language]} >
         <BaseLayout>{children}</BaseLayout>

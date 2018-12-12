@@ -7,6 +7,9 @@ import SiderMenu from './Menu'
 import styles from './Sider.less'
 
 class Sider extends PureComponent {
+
+  isShowSwithTheme = false
+
   render() {
     const {
       menus,
@@ -14,7 +17,10 @@ class Sider extends PureComponent {
       isMobile,
       collapsed,
       onCollapseChange,
+      onThemeChange,
     } = this.props;
+
+    const { isShowSwithTheme } = this;
 
     return (
       <Layout.Sider
@@ -50,11 +56,11 @@ class Sider extends PureComponent {
             />
           </ScrollBar>
         </div>
-        {collapsed ? null : (
+        {(collapsed || !isShowSwithTheme) ? null : (
           <div className={styles.switchTheme}>
             <span>
               <Icon type="bulb" />
-              <Trans>Switch Theme</Trans>
+              Switch Theme
             </span>
             <Switch
               onChange={onThemeChange.bind(
@@ -62,8 +68,8 @@ class Sider extends PureComponent {
                 theme === 'dark' ? 'light' : 'dark'
               )}
               defaultChecked={theme === 'dark'}
-              checkedChildren={i18n.t`Dark`}
-              unCheckedChildren={i18n.t`Light`}
+              checkedChildren={`Dark`}
+              unCheckedChildren={`Light`}
             />
           </div>
         )}

@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 import { Breadcrumb, Icon } from 'antd'
 import Link from 'umi/navlink'
 import withRouter from 'umi/withRouter'
+import {
+  queryAncestors,
+  pathMatchRegexp
+} from 'utils'
+
 import styles from './Bread.less'
 
 @withRouter

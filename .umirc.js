@@ -21,21 +21,30 @@ export default {
     ],
   ],
 
+  theme: './config/theme.config.js',
+
   plugins: [
     [
       'umi-plugin-react',
       {
         antd: true,
-        dynamicImport: {
-          webpackChunkName: true,
-          loadingComponent: './components/Loader/Loader',
-        },
+        dynamicImport: true, 
+        // {
+        //   webpackChunkName: true,
+        //   loadingComponent: './components/Loader/Loader',
+        // },
         routes: {
           exclude: [
             /stores\//,
             /components\//
           ],
         },
+        hardSource: /* isMac */ process.platform === 'darwin',
+        pwa: {
+          manifestOptions: {
+            srcPath: 'manifest.json'
+          },
+        }
       },
     ],
     [

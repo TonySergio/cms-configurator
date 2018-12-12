@@ -29,7 +29,7 @@ const defaultRoutes = [{
 
 const LayoutStore = types.model('LayoutStore', {
   loading: types.optional(Loading, {}),
-  avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+  avatar: '/anonym_user.jpg',
   userName: 'Black Jack',
   routeList: types.optional(types.array(MenuRoute), defaultRoutes),
   collapsed: store.get('collapsed') || false,

@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { inject, observer } from "mobx-react";
 import withRouter from 'umi/withRouter'
 import { BackTop, Layout, Drawer } from 'antd'
 import { GlobalFooter } from 'ant-design-pro'
@@ -14,7 +15,7 @@ const { Header, Bread, Sider } = AppLayout
 
 @withRouter
 @inject(rootStore => ({
-  layoutStore: rootStore.stores.LayoutStore
+    layoutStore: rootStore.stores.LayoutStore
 }))
 @observer
 class PrimaryLayout extends PureComponent {
@@ -41,10 +42,14 @@ class PrimaryLayout extends PureComponent {
     this.props.layoutStore.handleCollapseChange(collapsed);
   }
 
+  onThemeChange (theme) {
+    this.props.layoutStore.handleThemeChange(theme)
+  }
+
   render() {
     const { location, children, layoutStore } = this.props;
     const { isMobile } = this.state;
-    const { onCollapseChange } = this;
+    const { onCollapseChange, onThemeChange } = this;
     const {
       theme,
       collapsed,
@@ -53,6 +58,9 @@ class PrimaryLayout extends PureComponent {
       avatar,
       userName
     } = layoutStore;
+
+    console.log('layoutStore')
+    console.log(layoutStore);
 
     const newRouteList = routeList;
 
@@ -83,9 +91,7 @@ class PrimaryLayout extends PureComponent {
       isMobile,
       collapsed,
       onCollapseChange,
-      onThemeChange (theme) {
-        this.props.layoutStore.handleThemeChange(theme)
-      },
+      onThemeChange: onThemeChange.bind(this)
     };
 
     return (

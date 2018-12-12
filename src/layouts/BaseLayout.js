@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { inject, observer } from "mobx-react";
 import withRouter from 'umi/withRouter'
 import { Loader } from 'components'
 import { Helmet } from 'react-helmet'
@@ -31,8 +32,6 @@ class BaseLayout extends PureComponent {
     const { children, location, loading } = this.props;
 
     const currentPath = location.pathname + location.search
-
-    window.confirm(`Location is: ${location}`);
 
     if (currentPath !== this.previousPath) {
       //this.loadingStart();
