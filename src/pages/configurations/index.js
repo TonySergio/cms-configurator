@@ -14,14 +14,16 @@ import {
 
  import List from './components/List';
 
+ import styles from './configurations.less';
+
 const FormItem = Form.Item;
 
 const formItemLayout = {
   labelCol: {
-    span: 6,
+    span: 7,
   },
   wrapperCol: {
-    span: 18,
+    span: 17,
   },
 };
 
@@ -30,7 +32,7 @@ const formItemLayout = {
 }))
 @Form.create()
 @observer
-export default class ConfigurationPage extends PureComponent {
+export default class ConfigurationPage extends Component {
   render() {
       const { form, configurationsStore: store } = this.props;
       const { getFieldDecorator } = form;
@@ -44,10 +46,10 @@ export default class ConfigurationPage extends PureComponent {
       return (
         <Page inner>
           <h1>JVL Hardware and Software Configurator</h1>
-            <Form layout="horizontal">
+            <Form layout="horizontal" className={styles.filterForm}>
 
             <Row gutter={8}>
-              <Col span={12}>
+              <Col lg={12} md={24} sm={24}>
                 <FormItem label={`Choose the Jurisdiction`} hasFeedback {...formItemLayout}>
                   {getFieldDecorator('jurisdiction', {
                       rules: [
@@ -93,8 +95,10 @@ export default class ConfigurationPage extends PureComponent {
                 </FormItem>
 
                 <FormItem label={`Bank Configuration`}  {...formItemLayout}>
-                  {getFieldDecorator('bankConfigurationType') (
-                    <Radio.Group defaultValue="1" buttonStyle="solid" >
+                  {getFieldDecorator('bankConfigurationType', {
+                    initialValue: "1"
+                  }) (
+                    <Radio.Group buttonStyle="solid" >
                       <Radio.Button value="1">B2B</Radio.Button>
                       <Radio.Button value="2">Line</Radio.Button>
                       <Radio.Button value="3">Circle</Radio.Button>
@@ -105,7 +109,7 @@ export default class ConfigurationPage extends PureComponent {
 
               </Col>
 
-              <Col span={12}>
+              <Col lg={12} md={24} sm={24}>
                 <FieldContainer>
                   <FormItem label={`Number of Monitors`} hasFeedback {...formItemLayout}>
                     {getFieldDecorator('monitors', {
@@ -122,8 +126,10 @@ export default class ConfigurationPage extends PureComponent {
                     }
                   </FormItem>
                   <FormItem label={`Progressive Configuration`}  {...formItemLayout}>
-                    {getFieldDecorator('progressiveConfigurationType') (
-                      <Radio.Group defaultValue="1" buttonStyle="solid" >
+                    {getFieldDecorator('progressiveConfigurationType', {
+                      initialValue: "1"
+                    }) (
+                      <Radio.Group buttonStyle="solid" >
                         <Radio.Button value="1">Mega Digital Sign</Radio.Button>
                         <Radio.Button value="2">Regular Digital Sign</Radio.Button>
                         <Radio.Button value="3">Digital Toppers</Radio.Button>
@@ -134,7 +140,7 @@ export default class ConfigurationPage extends PureComponent {
                   </FormItem>
 
                   <FormItem label={`Progressive Software (Master)`} hasFeedback {...formItemLayout}>
-                    {getFieldDecorator('softwareMaster')(
+                    {getFieldDecorator('softwareMaster', {})(
                         <Select placeholder="All">
                           <Option value="1.0">1</Option>
                           <Option value="2.0">2</Option>
@@ -144,7 +150,7 @@ export default class ConfigurationPage extends PureComponent {
                     }
                   </FormItem>
                   <FormItem label={`Progressive Software (Slave)`} hasFeedback {...formItemLayout}>
-                    {getFieldDecorator('softwareSlave')(
+                    {getFieldDecorator('softwareSlave', {})(
                         <Select placeholder="All">
                           <Option value="1.0.1">1</Option>
                           <Option value="2.0.1">2</Option>
@@ -160,10 +166,11 @@ export default class ConfigurationPage extends PureComponent {
 
           </Row>
 
-          <Row>
+          <Row className={styles.filterButtons}>
             <Col span={24} style={ { textAlign: 'right' } }>
               <FormItem wrapperCol={ {span: 12, offset: 6} }>
                   <Button type="primary" htmlType="submit" onClick={this.handleOk}>Apply</Button>
+                  <Button>Clear filters</Button>
               </FormItem>
             </Col>
           </Row>

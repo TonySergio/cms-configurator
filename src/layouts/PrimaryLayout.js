@@ -125,7 +125,7 @@ class PrimaryLayout extends React.Component {
                     target={() => document.querySelector('#primaryLayout>div')}
                 />
                 <GlobalFooter
-                  className={styles.backTop}
+                  className={styles.footer}
                   copyright={config.copyright}
                 />
             </div>
