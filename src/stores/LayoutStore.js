@@ -14,9 +14,11 @@ const defaultTheme = 'light';
 
 const MenuRoute = types.model('MenuRoute', {
   id: types.string,
-  icon: types.string,
+  icon: types.optional(types.string, ''),
   name: types.string,
-  route: types.string
+  route: types.string,
+  menuParentId: types.optional(types.string, ''),
+  breadcrumbParentId: types.optional(types.string, '')
 })
 
 
@@ -25,13 +27,20 @@ const defaultRoutes = [{
     icon: 'home',
     name: 'Start Page',
     route: '/home',
-},
+  },
   {
       id: '2',
       icon: 'database',
       name: 'Configurations',
       route: '/configurations',
-  }
+  },
+  {
+    id: '21',
+    menuParentId: '-1',
+    breadcrumbParentId: '2',
+    name: 'Configuration Edit',
+    route: '/configurations/:id'
+  },
 ];
 
 const LayoutStore = types.model('LayoutStore', {

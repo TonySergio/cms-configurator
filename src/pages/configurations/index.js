@@ -9,7 +9,8 @@ import {
   Select,
   Button,
   Radio,
-  message
+  message,
+  Popconfirm,
  } from "antd";
 
  import List from './components/List';
@@ -178,6 +179,22 @@ export default class ConfigurationPage extends Component {
         </Form>
 
         <h2>Available Configurations</h2>
+        {selectedRowKeys.length > 0 && (
+          <Row style={ {marginBottom: 15, textAlign: 'right', fontSize: 13} }>
+            <Col>
+              {`Selected ${selectedRowKeys.length} items`}
+              <Popconfirm
+                title="Are you wanna delete selected items?"
+                placement="left"
+                onConfirm={()=>{}}
+              >
+                <Button type="primary" style={{ marginLeft: 8}}>
+                  Remove
+                </Button>   
+              </Popconfirm>
+            </Col>
+          </Row>
+        )}
         <List
           dataSource={list}
           pagination={pagination}

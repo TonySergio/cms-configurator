@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { observable, action } from "mobx";
 import { Button, Rate, Row, Col, DatePicker  } from "antd";
 import Link from "umi/link";
+import { Page } from 'components';
 
 const {  RangePicker } = DatePicker;
 
@@ -18,40 +19,18 @@ class App extends Component {
     this.value = this.value + 1;
   }
 
-  onChangeDate (date, dateString) {
-    console.log(date, dateString);
-  }
-
   render() {
     return (
-      <div>
-        <Row>
-          <Col span={12}>
-            <Link to="/configurations">Go to list page</Link>
-          </Col>
-          <Col span={12}>
-            <Rate allowHalf defaultValue={5} />
-            <h2>{this.props.Home.name}</h2>
-            <Button
-              type="primary"
-              onClick={() => {
-                this.props.Home.setTitle("new name");
-                console.log("click");
-              }}
-            >
-              yo
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          <div>Value: {this.value * 2}</div>
-          <Button onClick={this.plus}>Plus</Button>
-        </Row>
-        <Row>
-          <RangePicker onChange={this.onChangeDate} />
-
-        </Row>
-      </div>
+      <Page inner>
+        <div>
+        <h1>Hello! This is Welcome Page</h1>
+          <Row>
+            <Col span={12}>
+              <Link to="/configurations">Go to Configurations list</Link>
+            </Col>
+          </Row>
+        </div>
+      </Page>
     );
   }
 }
