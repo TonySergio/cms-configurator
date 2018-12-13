@@ -6,7 +6,8 @@ export default {
     components: resolve(__dirname, './src/components'),
     utils: resolve(__dirname, './src/utils'),
     config: resolve(__dirname, './src/utils/config'),
-    themes: resolve(__dirname, './src/themes')
+    themes: resolve(__dirname, './src/themes'),
+    models: resolve(__dirname, './src/models'),
   },
 
   extraBabelPlugins: [
@@ -36,7 +37,8 @@ export default {
         routes: {
           exclude: [
             /stores\//,
-            /components\//
+            /components\//,
+            /models\//
           ],
         },
         hardSource: /* isMac */ process.platform === 'darwin',

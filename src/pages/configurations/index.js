@@ -12,6 +12,8 @@ import {
   message
  } from "antd";
 
+ import List from './components/List';
+
 const FormItem = Form.Item;
 
 const formItemLayout = {
@@ -23,14 +25,25 @@ const formItemLayout = {
   },
 };
 
+@inject(rootStore => ({
+    configurationsStore: rootStore.stores.ConfigurationsStore
+}))
 @Form.create()
+@observer
 export default class ConfigurationPage extends PureComponent {
   render() {
-      const { form } = this.props;
+      const { form, configurationsStore: store } = this.props;
       const { getFieldDecorator } = form;
+
+      const {
+        list,
+        pagination,
+        selectedRowKeys,
+      } = store;
 
       return (
         <Page inner>
+          <h1>JVL Hardware and Software Configurator</h1>
             <Form layout="horizontal">
 
             <Row gutter={8}>
@@ -48,7 +61,50 @@ export default class ConfigurationPage extends PureComponent {
                   )
                   }
                 </FormItem>
+
+                <FormItem label={`Choose the Product`} hasFeedback {...formItemLayout}>
+                  {getFieldDecorator('product', {
+                      rules: [
+                        { required: true, message: 'Please select Product' },
+                      ]
+                  })(
+                      <Select placeholder="All">
+                        <Option value="1">LCG</Option>
+                        <Option value="2">HG5</Option>
+                        <Option value="3">HG6</Option>
+                        <Option value="4">COD</Option>
+                      </Select>
+                  )
+                  }
+                </FormItem>
+
+                <FormItem label={`Choose the Cabinet Type`} hasFeedback {...formItemLayout}>
+                  {getFieldDecorator('cabinetType', {
+                      rules: [
+                        { required: true, message: 'Please select Cainet Type' },
+                      ]
+                  })(
+                      <Select placeholder="All">
+                        <Option value="1">Altera</Option>
+                        <Option value="2">Maple</Option>
+                      </Select>
+                  )
+                  }
+                </FormItem>
+
+                <FormItem label={`Bank Configuration`}  {...formItemLayout}>
+                  {getFieldDecorator('bankConfigurationType') (
+                    <Radio.Group defaultValue="1" buttonStyle="solid" >
+                      <Radio.Button value="1">B2B</Radio.Button>
+                      <Radio.Button value="2">Line</Radio.Button>
+                      <Radio.Button value="3">Circle</Radio.Button>
+                    </Radio.Group>
+                  )
+                }
+                </FormItem>
+
               </Col>
+
               <Col span={12}>
                 <FieldContainer>
                   <FormItem label={`Number of Monitors`} hasFeedback {...formItemLayout}>
@@ -65,16 +121,8 @@ export default class ConfigurationPage extends PureComponent {
                     )
                     }
                   </FormItem>
-                  <FormItem label={`Progressive Configuration`} hasFeedback {...formItemLayout}>
-                    {getFieldDecorator('progressiveConfigurationType', {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'This very important',
-                            type: 'string'
-                          }
-                        ]
-                    })(
+                  <FormItem label={`Progressive Configuration`}  {...formItemLayout}>
+                    {getFieldDecorator('progressiveConfigurationType') (
                       <Radio.Group defaultValue="1" buttonStyle="solid" >
                         <Radio.Button value="1">Mega Digital Sign</Radio.Button>
                         <Radio.Button value="2">Regular Digital Sign</Radio.Button>
@@ -85,21 +133,58 @@ export default class ConfigurationPage extends PureComponent {
                   }
                   </FormItem>
 
+                  <FormItem label={`Progressive Software (Master)`} hasFeedback {...formItemLayout}>
+                    {getFieldDecorator('softwareMaster')(
+                        <Select placeholder="All">
+                          <Option value="1.0">1</Option>
+                          <Option value="2.0">2</Option>
+                          <Option value="3.0">3</Option>
+                        </Select>
+                    )
+                    }
+                  </FormItem>
+                  <FormItem label={`Progressive Software (Slave)`} hasFeedback {...formItemLayout}>
+                    {getFieldDecorator('softwareSlave')(
+                        <Select placeholder="All">
+                          <Option value="1.0.1">1</Option>
+                          <Option value="2.0.1">2</Option>
+                          <Option value="3.0.1">3</Option>
+                        </Select>
+                    )
+                    }
+                  </FormItem>
+
 
                 </FieldContainer>
             </Col>
 
           </Row>
 
-              <Row>
-                <Col span={24} style={ { textAlign: 'right' } }>
-                  <FormItem wrapperCol={ {span: 12, offset: 6} }>
-                      <Button type="primary" htmlType="submit" onClick={this.handleOk}>Apply</Button>
-                  </FormItem>
-                </Col>
-              </Row>
+          <Row>
+            <Col span={24} style={ { textAlign: 'right' } }>
+              <FormItem wrapperCol={ {span: 12, offset: 6} }>
+                  <Button type="primary" htmlType="submit" onClick={this.handleOk}>Apply</Button>
+              </FormItem>
+            </Col>
+          </Row>
 
-            </Form>
+        </Form>
+
+        <h2>Available Configurations</h2>
+        <List
+          dataSource={list}
+          pagination={pagination}
+          onChange={(page) => {
+            console.log('Table List Change');
+          }}
+          rowSelection={{
+            selectedRowKeys,
+            onChange: keys => {
+              store.setSelectedKeys(keys)
+            }
+          }}
+        />
+
         </Page>
       )
   }
