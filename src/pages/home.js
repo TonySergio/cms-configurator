@@ -1,11 +1,10 @@
 import { Component } from "react";
 import { inject, observer } from "mobx-react";
 import { observable, action } from "mobx";
-import { Button, Rate, Row, Col, DatePicker  } from "antd";
+import {  Row, Col, Divider  } from "antd";
 import Link from "umi/link";
 import { Page } from 'components';
 
-const {  RangePicker } = DatePicker;
 
 @inject(rootStore => ({
     Home: rootStore.stores.Home
@@ -24,6 +23,7 @@ class App extends Component {
       <Page inner>
         <div>
         <h1>Hello! This is Welcome Page</h1>
+        <Divider />
           <Row>
             <Col span={12}>
               <Link to="/configurations">Go to Configurations list</Link>

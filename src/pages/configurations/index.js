@@ -11,6 +11,7 @@ import {
   Radio,
   message,
   Popconfirm,
+  Tooltip
  } from "antd";
 
  import List from './components/List';
@@ -190,7 +191,7 @@ export default class ConfigurationPage extends Component {
               >
                 <Button type="primary" style={{ marginLeft: 8}}>
                   Remove
-                </Button>   
+                </Button>
               </Popconfirm>
             </Col>
           </Row>
@@ -208,6 +209,23 @@ export default class ConfigurationPage extends Component {
             }
           }}
         />
+
+        <Row className={styles.filterButtons}>
+          <Col span={24} style={ { textAlign: 'left' } }>
+            <Tooltip placement="top" title={<span>View or Edit selected configuration</span>}>
+              <Button>View the Configuration</Button>
+            </Tooltip>
+
+            <Tooltip placement="top" title={<span>Compare pair of configurations</span>}>
+              <Button>Compare Configurations</Button>
+            </Tooltip>
+
+            <Tooltip placement="top" title={<span>Compare with exist Bank configuration</span>}>
+              <Button>Compare with exist Bank</Button>
+            </Tooltip>
+
+          </Col>
+        </Row>
 
         </Page>
       )
