@@ -11,7 +11,8 @@ import {
   Radio,
   message,
   Popconfirm,
-  Tooltip
+  Tooltip,
+  notification
  } from "antd";
 
  import List from './components/List';
@@ -213,15 +214,15 @@ export default class ConfigurationPage extends Component {
         <Row className={styles.filterButtons}>
           <Col span={24} style={ { textAlign: 'left' } }>
             <Tooltip placement="top" title={<span>View or Edit selected configuration</span>}>
-              <Button>View the Configuration</Button>
+              <Button onClick={this.handleNotRealized}>View the Configuration</Button>
             </Tooltip>
 
             <Tooltip placement="top" title={<span>Compare pair of configurations</span>}>
-              <Button>Compare Configurations</Button>
+              <Button onClick={this.handleNotRealized}>Compare Configurations</Button>
             </Tooltip>
 
             <Tooltip placement="top" title={<span>Compare with exist Bank configuration</span>}>
-              <Button>Compare with exist Bank</Button>
+              <Button onClick={this.handleNotRealized}>Compare with exist Bank</Button>
             </Tooltip>
 
           </Col>
@@ -229,6 +230,22 @@ export default class ConfigurationPage extends Component {
 
         </Page>
       )
+  }
+
+  handleNotRealized = () => {
+     const key = `open${Date.now()}`;
+     const btn = (
+       <Button type="danger" size="small" onClick={() => notification.close(key)}>
+        Confirm
+       </Button>
+     )
+     notification.open({
+       message: 'Functionality not implemented',
+       description: 'Wait for the next release please.',
+       placement: 'bottomLeft',
+       btn,
+       key
+     })
   }
 
   handleOk = () => {
