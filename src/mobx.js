@@ -1,6 +1,6 @@
 export function config() {
   return {
-    devTools: true,
+    devTools: false,
     mstTools: true,
     initStores: {
       list: {
